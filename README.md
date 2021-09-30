@@ -10,16 +10,16 @@ Add the ESLint config in your package:
 yarn add @valora/eslint-config-typescript --dev
 ```
 
-and add all the [`peerDependencies`](./packages.json).
+and add all the [`peerDependencies`](./package.json).
 
 ## Using
 
-Add a script to your package.json:
+Add a script to your package.json like:
 
 ```json
 {
   "scripts": {
-    "eslint": "eslint --ext=.tsx,.ts src/"
+    "lint": "eslint --ext=.tsx,.ts src/"
   }
 }
 ```
