@@ -18,5 +18,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "devDependencies": {
+    "@valora/prettier-config": "^0.0.1"
+  },
+  "prettier": "@valora/prettier-config"
 }
