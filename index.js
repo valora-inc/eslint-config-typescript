@@ -35,6 +35,9 @@ module.exports = {
       { checksVoidReturn: false },
     ],
     '@typescript-eslint/no-floating-promises': 'error',
+    'jest/expect-expect': ['error', { assertFunctionNames: ['expect*'] }],
+    'jest/no-commented-out-tests': 'error',
+    'jest/no-disabled-tests': 'error',
 
     // Disable rules pulled in by "recommended" above that we're failing. It could make
     // sense to work towards enabling these.
