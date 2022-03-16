@@ -4,9 +4,17 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import', 'react', 'react-native', 'react-hooks'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'react',
+    'react-native',
+    'react-hooks',
+    'jest',
+  ],
   rules: {
     'no-eval': 'error',
     '@typescript-eslint/triple-slash-reference': 'error',
@@ -22,8 +30,14 @@ module.exports = {
     '@typescript-eslint/no-extra-semi': 'off',
     '@typescript-eslint/semi': 'off',
     'react-hooks/rules-of-hooks': 'error',
-    '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      { checksVoidReturn: false },
+    ],
     '@typescript-eslint/no-floating-promises': 'error',
+    'jest/expect-expect': ['error', { assertFunctionNames: ['expect*'] }],
+    'jest/no-commented-out-tests': 'error',
+    'jest/no-disabled-tests': 'error',
 
     // Disable rules pulled in by "recommended" above that we're failing. It could make
     // sense to work towards enabling these.
