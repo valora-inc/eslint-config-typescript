@@ -19,7 +19,7 @@ module.exports = {
     'no-eval': 'error',
     '@typescript-eslint/triple-slash-reference': 'error',
     'import/no-relative-packages': 'error',
-    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+    'no-console': 'error',
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-inner-declarations': ['error', 'functions'],
     'no-restricted-syntax': ['error', 'ForInStatement'],
