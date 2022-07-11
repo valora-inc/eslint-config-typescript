@@ -1,6 +1,6 @@
 {
   "name": "@valora/eslint-config-typescript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": "Valora Inc",
   "license": "Apache-2.0",
