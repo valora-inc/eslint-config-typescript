@@ -41,3 +41,7 @@ module.exports = {
 ## Resources
 
 ESLint [Shareable Configs](https://eslint.org/docs/developer-guide/shareable-configs).
+
+## Publishing
+
+Run `yarn release` and follow the instructions.
