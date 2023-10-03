@@ -38,6 +38,10 @@ module.exports = {
     'jest/expect-expect': ['error', { assertFunctionNames: ['expect*'] }],
     'jest/no-commented-out-tests': 'error',
     'jest/no-disabled-tests': 'error',
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.test.ts', '**/*.spec.ts', '**/e2e/**/*.ts'] },
+    ],
 
     // Disable rules pulled in by "recommended" above that we're failing. It could make
     // sense to work towards enabling these.
