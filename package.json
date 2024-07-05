@@ -7,6 +7,10 @@
   "scripts": {
     "release": "standard-version"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valora-inc/eslint-config-typescript.git"
+  },
   "dependencies": {
     "@typescript-eslint/parser": "^7.1.1"
   },
