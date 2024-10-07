@@ -1,0 +1,82 @@
+name: Workflow
+
+on:
+  # Run on pushes to main..
+  push:
+    branches:
+      - main
+  # ..and any pull request.
+  pull_request:
+
+# Cancel any in progress run of the workflow for a given PR
+# This avoids building outdated code
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-for-sh:
+    name: Check for .sh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: "echo '*** Do not write .sh scripts! ***'; ! find . -type f -name '*.sh' | grep ."
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          check-latest: true
+      - run: yarn
+      - run: yarn format:check
+  publish:
+    name: Publish to NPM
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - check-for-sh
+      - lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+    steps:
+      # actions/checkout MUST come before auth
+      - uses: actions/checkout@v4
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.MAINNET_SERVICE_ACCOUNT_KEY }}
+      - id: google-secrets
+        uses: google-github-actions/get-secretmanager-secrets@v2
+        with:
+          # valora-viem-hsm-test service account has access to these specific secrets
+          secrets: |-
+            NPM_TOKEN:celo-mobile-mainnet/NPM_TOKEN
+            SLACK_WEBHOOK_URL:celo-mobile-mainnet/SLACK_ONCALL_WEBHOOK_URL
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          check-latest: true
+      - run: yarn
+      - run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ steps.google-secrets.outputs.NPM_TOKEN }}
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          notification_title: '{workflow} has {status_message}'
+          message_format: '{emoji} *{workflow}* {status_message}. <{run_url}|View Run>'
+          footer: 'Repo: <{repo_url}|{repo}>'
+          notify_when: 'failure'
+          # Tag @supporthero on failures, can change to any slack group id
+          mention_groups: 'S0277QUM4KB'
+          mention_groups_when: 'failure'
+        env:
+          SLACK_WEBHOOK_URL: ${{ steps.google-secrets.outputs.SLACK_WEBHOOK_URL }}
