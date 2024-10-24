@@ -12,7 +12,7 @@
     "url": "https://github.com/valora-inc/eslint-config-typescript.git"
   },
   "dependencies": {
-    "@typescript-eslint/parser": "^7.1.1"
+    "@typescript-eslint/parser": "^8.11.0"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": ">=4.0.0",
