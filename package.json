@@ -11,6 +11,9 @@
     "type": "git",
     "url": "https://github.com/valora-inc/eslint-config-typescript.git"
   },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "format": "prettier --log-level error --write .",
     "format:check": "prettier --check .",
