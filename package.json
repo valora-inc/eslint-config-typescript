@@ -1,15 +1,20 @@
 {
   "name": "@valora/eslint-config-typescript",
-  "version": "1.0.2",
+  "version": "0.0.0-semantic-release",
   "main": "index.js",
   "author": "Valora Inc",
   "license": "Apache-2.0",
-  "scripts": {
-    "release": "standard-version"
+  "engines": {
+    "node": ">=18"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/valora-inc/eslint-config-typescript.git"
+  },
+  "scripts": {
+    "format": "prettier --log-level error --write .",
+    "format:check": "prettier --check .",
+    "release": "semantic-release"
   },
   "dependencies": {
     "@typescript-eslint/parser": "^7.1.1"
@@ -23,12 +28,21 @@
     "eslint-plugin-react-hooks": ">=4.0.0",
     "eslint-plugin-react-native": ">=3.0.0"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "devDependencies": {
     "@valora/prettier-config": "^0.0.1",
-    "standard-version": "^9.5.0"
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "prettier": "^3.3.3",
+    "semantic-release": "^24.1.2"
   },
-  "prettier": "@valora/prettier-config"
+  "prettier": "@valora/prettier-config",
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "preset": "conventionalcommits"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
