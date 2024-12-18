@@ -40,7 +40,12 @@ module.exports = {
     'jest/no-disabled-tests': 'error',
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.ts', '**/*.spec.ts', '**/e2e/**/*.ts'] },
+      {
+        devDependencies: [
+          '**/*.{test,spec,e2e}.{ts,tsx}',
+          '**/{e2e,test,scripts}/**/*.{ts,tsx}',
+        ],
+      },
     ],
 
     // Disable rules pulled in by "recommended" above that we're failing. It could make
