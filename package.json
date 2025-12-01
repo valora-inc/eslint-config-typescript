@@ -34,7 +34,7 @@
   "devDependencies": {
     "@valora/prettier-config": "^0.0.1",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.1",
     "semantic-release": "^25.0.2"
   },
   "prettier": "@valora/prettier-config",
